@@ -2,28 +2,60 @@ package com.github.opengl8080.kanatil;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class KanatilTest {
+
+    private static List<Character> kanaSymbols = Arrays.asList('ﾞ', 'ﾟ', '｡', '｢', '｣', '､', '･', 'ｰ');
+    private static List<Character> kanaCharacters = Arrays.asList(
+        'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ',
+        'ｶ', 'ｷ', 'ｸ', 'ｹ', 'ｺ',
+        'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ',
+        'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ',
+        'ﾅ', 'ﾆ', 'ﾇ', 'ﾈ', 'ﾉ',
+        'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ',
+        'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ',
+        'ﾔ', 'ﾕ', 'ﾖ',
+        'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ',
+        'ﾜ', 'ｦ', 'ﾝ',
+        'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ',
+        'ｬ', 'ｭ', 'ｮ',
+        'ｯ'
+    );
+    private static List<Character> kanas;
+    
+    @BeforeClass
+    public static void setup() {
+        kanas = new ArrayList<Character>();
+        kanas.addAll(kanaSymbols);
+        kanas.addAll(kanaCharacters);
+    }
+
+    @Test
+    public void 半角ｶﾅ記号判定_true() {
+        for (char kanaSymbol : kanaSymbols) {
+            assertThat(Kanatil.isHalfwidthKanaSymbol(kanaSymbol))
+                .as(kanaSymbol + "")
+                .isTrue();
+        }
+    }
+
+    @Test
+    public void 半角ｶﾅ記号判定_記号以外はfalse() {
+        for (char kanaSymbol : kanaCharacters) {
+            assertThat(Kanatil.isHalfwidthKanaSymbol(kanaSymbol))
+                .as(kanaSymbol + "")
+                .isFalse();
+        }
+    }
     
     @Test
     public void 半角ｶﾅ判定_true() {
-        char[] kanas = {
-            'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ',
-            'ｶ', 'ｷ', 'ｸ', 'ｹ', 'ｺ',
-            'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ',
-            'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ',
-            'ﾅ', 'ﾆ', 'ﾇ', 'ﾈ', 'ﾉ',
-            'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ',
-            'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ',
-            'ﾔ', 'ﾕ', 'ﾖ',
-            'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ',
-            'ﾜ', 'ｦ', 'ﾝ',
-            'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ',
-            'ｬ', 'ｭ', 'ｮ',
-            'ｯ',
-            'ﾞ', 'ﾟ', '｡', '｢', '｣', '､', '･', 'ｰ'};
-        
         for (char kana : kanas) {
             assertThat(Kanatil.isHalfwidthKana(kana))
                 .as(kana + "")
