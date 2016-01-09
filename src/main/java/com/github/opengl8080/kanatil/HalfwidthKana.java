@@ -1,6 +1,6 @@
 package com.github.opengl8080.kanatil;
 
-public class Kanatil {
+public class HalfwidthKana {
 
     public static boolean isHalfwidthKanaSymbol(char c) {
         return 0xFF61 <= c && c <= 0xFF65

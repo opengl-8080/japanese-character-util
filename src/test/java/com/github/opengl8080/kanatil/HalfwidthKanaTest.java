@@ -12,7 +12,8 @@ import org.junit.runner.RunWith;
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
 @RunWith(HierarchicalContextRunner.class)
-public class KanatilTest {
+public class HalfwidthKanaTest {
+
     /**半角ｶﾅ記号*/
     private static List<Character> kanaSymbols = Arrays.asList('ﾞ', 'ﾟ', '｡', '｢', '｣', '､', '･', 'ｰ');
     /**半角ｶﾅ通常文字*/
@@ -63,7 +64,7 @@ public class KanatilTest {
         @Test
         public void 半角ｶﾅ小文字はtrue() {
             for (char c : kanaLowerCharacters) {
-                assertThat(Kanatil.isHalfwidthKanaLowerCharacter(c))
+                assertThat(HalfwidthKana.isHalfwidthKanaLowerCharacter(c))
                     .as(c + "")
                     .isTrue();
             }
@@ -72,7 +73,7 @@ public class KanatilTest {
         @Test
         public void 半角ｶﾅ通常文字はfalse() {
             for (char c : kanaUpperCharacters) {
-                assertThat(Kanatil.isHalfwidthKanaLowerCharacter(c))
+                assertThat(HalfwidthKana.isHalfwidthKanaLowerCharacter(c))
                     .as(c + "")
                     .isFalse();
             }
@@ -84,7 +85,7 @@ public class KanatilTest {
         @Test
         public void 半角ｶﾅ文字はtrue() {
             for (char c : kanaCharacters) {
-                assertThat(Kanatil.isHalfwidthKanaCharacter(c))
+                assertThat(HalfwidthKana.isHalfwidthKanaCharacter(c))
                     .as(c + "")
                     .isTrue();
             }
@@ -93,7 +94,7 @@ public class KanatilTest {
         @Test
         public void 半角ｶﾅ記号はfalse() {
             for (char c : kanaSymbols) {
-                assertThat(Kanatil.isHalfwidthKanaCharacter(c))
+                assertThat(HalfwidthKana.isHalfwidthKanaCharacter(c))
                     .as(c + "")
                     .isFalse();
             }
@@ -105,7 +106,7 @@ public class KanatilTest {
         @Test
         public void 半角ｶﾅ記号はtrue() {
             for (char c : kanaSymbols) {
-                assertThat(Kanatil.isHalfwidthKanaSymbol(c))
+                assertThat(HalfwidthKana.isHalfwidthKanaSymbol(c))
                     .as(c + "")
                     .isTrue();
             }
@@ -114,7 +115,7 @@ public class KanatilTest {
         @Test
         public void 半角ｶﾅ文字はfalse() {
             for (char c : kanaCharacters) {
-                assertThat(Kanatil.isHalfwidthKanaSymbol(c))
+                assertThat(HalfwidthKana.isHalfwidthKanaSymbol(c))
                     .as(c + "")
                     .isFalse();
             }
@@ -126,7 +127,7 @@ public class KanatilTest {
         @Test
         public void 半角ｶﾅ文字種はtrue() {
             for (char c : kanas) {
-                assertThat(Kanatil.isHalfwidthKana(c))
+                assertThat(HalfwidthKana.isHalfwidthKana(c))
                     .as(c + "")
                     .isTrue();
             }
@@ -135,7 +136,7 @@ public class KanatilTest {
         @Test
         public void アスキー文字種はfalse() {
             for (char c : asciies) {
-                assertThat(Kanatil.isHalfwidthKana(c))
+                assertThat(HalfwidthKana.isHalfwidthKana(c))
                     .as(c + "")
                     .isFalse();
             }
