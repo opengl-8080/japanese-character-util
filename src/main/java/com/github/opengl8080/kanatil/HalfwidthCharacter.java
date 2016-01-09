@@ -22,4 +22,57 @@ public class HalfwidthCharacter {
     public static boolean isHalfwidthLowerCharacter(char c) {
         return 0xFF67 <= c && c <= 0xFF6F;
     }
+
+    public static boolean isHalfwidthCharacter(String string) {
+        if (isEmpty(string) || hasSurrogatePair(string)) {
+            return false;
+        }
+        
+        for (char c : string.toCharArray()) {
+            if (!isHalfwidthCharacter(c)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    private static boolean isEmpty(String string) {
+        return string == null || string.isEmpty();
+    }
+    
+    private static boolean hasSurrogatePair(String string) {
+        int length = string.length();
+        int codePointLength = string.codePointCount(0, length);
+        
+        return length != codePointLength;
+    }
+
+    public static boolean isHalfwidthSymbol(String string) {
+        if (isEmpty(string) || hasSurrogatePair(string)) {
+            return false;
+        }
+        
+        for (char c : string.toCharArray()) {
+            if (!isHalfwidthSymbol(c)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    public static boolean isHalfwidth(String string) {
+        if (isEmpty(string) || hasSurrogatePair(string)) {
+            return false;
+        }
+        
+        for (char c : string.toCharArray()) {
+            if (!isHalfwidth(c)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
 }
