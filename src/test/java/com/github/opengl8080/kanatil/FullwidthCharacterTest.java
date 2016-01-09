@@ -1,10 +1,10 @@
 package com.github.opengl8080.kanatil;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.assertj.core.api.AbstractBooleanAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -17,28 +17,28 @@ public class FullwidthCharacterTest {
 
         @Test
         public void ひらがなの場合はtrue() {
-            assertThatHiragana(Characters.HIRAGANA).isTrue();
+            assertThatHiragana(Characters.HIRAGANA, true);
         }
 
         @Test
         public void カタカナの場合はfalse() {
-            assertThatHiragana(Characters.KATAKANA).isFalse();
+            assertThatHiragana(Characters.KATAKANA, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatHiragana(List<Character> chars) {
+        private void assertThatHiragana(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            return assertThat(FullwidthCharacter.isHiragana(str)).as(str);
+            assertThat(str, FullwidthCharacter.isHiragana(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(FullwidthCharacter.isHiragana(str)).isFalse();
+            assertThat(FullwidthCharacter.isHiragana(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(FullwidthCharacter.isHiragana((String)null)).isFalse();
+            assertThat(FullwidthCharacter.isHiragana((String)null), is(false));
         }
     }
     
@@ -47,23 +47,23 @@ public class FullwidthCharacterTest {
         @Test
         public void ひらがなの場合はtrue() throws Exception {
             for (Character c : Characters.HIRAGANA) {
-                assertThatHiragana(c).isTrue();
+                assertThatHiragana(c, true);
             }
         }
         @Test
         public void カタカナの場合はfalse() throws Exception {
             for (Character c : Characters.KATAKANA) {
-                assertThatHiragana(c).isFalse();
+                assertThatHiragana(c, false);
             }
         }
 
         @Test
         public void nullはfalse() {
-            assertThatHiragana(null).isFalse();
+            assertThatHiragana(null, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatHiragana(Character c) {
-            return assertThat(FullwidthCharacter.isHiragana(c)).as(c + "");
+        private void assertThatHiragana(Character c, boolean expected) {
+            assertThat(c + "", FullwidthCharacter.isHiragana(c), is(expected));
         }
     }
     
@@ -71,28 +71,28 @@ public class FullwidthCharacterTest {
 
         @Test
         public void カタカナの場合はtrue() {
-            assertThatHiragana(Characters.KATAKANA).isTrue();
+            assertThatHiragana(Characters.KATAKANA, true);
         }
 
         @Test
         public void ひらがなの場合はfalse() {
-            assertThatHiragana(Characters.HIRAGANA).isFalse();
+            assertThatHiragana(Characters.HIRAGANA, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatHiragana(List<Character> chars) {
+        private void assertThatHiragana(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            return assertThat(FullwidthCharacter.isKatakana(str)).as(str);
+            assertThat(str, FullwidthCharacter.isKatakana(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(FullwidthCharacter.isKatakana(str)).isFalse();
+            assertThat(FullwidthCharacter.isKatakana(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(FullwidthCharacter.isKatakana((String)null)).isFalse();
+            assertThat(FullwidthCharacter.isKatakana((String)null), is(false));
         }
     }
 
@@ -101,24 +101,24 @@ public class FullwidthCharacterTest {
         @Test
         public void カタカナの場合はtrue() throws Exception {
             for (Character c : Characters.KATAKANA) {
-                assertThatKatakana(c).isTrue();
+                assertThatKatakana(c, true);
             }
         }
         
         @Test
         public void ひらがなの場合はfalse() throws Exception {
             for (Character c : Characters.HIRAGANA) {
-                assertThatKatakana(c).isFalse();
+                assertThatKatakana(c, false);
             }
         }
 
         @Test
         public void nullはfalse() {
-            assertThatKatakana(null).isFalse();
+            assertThatKatakana(null, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatKatakana(Character c) {
-            return assertThat(FullwidthCharacter.isKatakana(c)).as(c + "");
+        private void assertThatKatakana(Character c, boolean expected) {
+            assertThat(c + "", FullwidthCharacter.isKatakana(c), is(expected));
         }
     }
     

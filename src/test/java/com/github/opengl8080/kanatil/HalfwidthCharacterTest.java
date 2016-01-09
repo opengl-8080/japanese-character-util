@@ -1,10 +1,10 @@
 package com.github.opengl8080.kanatil;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.assertj.core.api.AbstractBooleanAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -19,24 +19,24 @@ public class HalfwidthCharacterTest {
         @Test
         public void 半角ｶﾅ小文字はtrue() {
             for (Character c : Characters.HALFWIDTH_LOWER_CHARACTER) {
-                assertThatLowerCharacter(c).isTrue();
+                assertThatLowerCharacter(c, true);
             }
         }
 
         @Test
         public void 半角ｶﾅ通常文字はfalse() {
             for (Character c : Characters.HALFWIDTH_UPPER_CHARACTER) {
-                assertThatLowerCharacter(c).isFalse();
+                assertThatLowerCharacter(c, false);
             }
         }
 
         @Test
         public void nullはfalse() {
-            assertThatLowerCharacter(null).isFalse();
+            assertThatLowerCharacter(null, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatLowerCharacter(Character c) {
-            return assertThat(HalfwidthCharacter.isHalfwidthLowerCharacter(c)).as(c + "");
+        private void assertThatLowerCharacter(Character c, boolean expected) {
+            assertThat(c + "", HalfwidthCharacter.isHalfwidthLowerCharacter(c), is(expected));
         }
     }
     
@@ -44,28 +44,28 @@ public class HalfwidthCharacterTest {
 
         @Test
         public void 半角ｶﾅ文字はtrue() {
-            assertThatHalfwidthCharacter(Characters.HALFWIDTH_CHARACTER).isTrue();
+            assertThatHalfwidthCharacter(Characters.HALFWIDTH_CHARACTER, true);
         }
 
         @Test
         public void 半角ｶﾅ記号はfalse() {
-            assertThatHalfwidthCharacter(Characters.HALFWIDTH_SYMBOL).isFalse();
+            assertThatHalfwidthCharacter(Characters.HALFWIDTH_SYMBOL, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatHalfwidthCharacter(List<Character> chars) {
+        private void assertThatHalfwidthCharacter(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            return assertThat(HalfwidthCharacter.isHalfwidthCharacter(str)).as(str);
+            assertThat(str, HalfwidthCharacter.isHalfwidthCharacter(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(HalfwidthCharacter.isHalfwidthCharacter(str)).isFalse();
+            assertThat(HalfwidthCharacter.isHalfwidthCharacter(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(HalfwidthCharacter.isHalfwidthCharacter((String)null)).isFalse();
+            assertThat(HalfwidthCharacter.isHalfwidthCharacter((String)null), is(false));
         }
     }
     
@@ -74,24 +74,24 @@ public class HalfwidthCharacterTest {
         @Test
         public void 半角ｶﾅ文字はtrue() {
             for (Character c : Characters.HALFWIDTH_CHARACTER) {
-                assertThatCharacter(c).isTrue();
+                assertThatCharacter(c, true);
             }
         }
 
         @Test
         public void 半角ｶﾅ記号はfalse() {
             for (Character c : Characters.HALFWIDTH_SYMBOL) {
-                assertThatCharacter(c).isFalse();
+                assertThatCharacter(c, false);
             }
         }
 
         @Test
         public void nullはfalse() {
-            assertThatCharacter(null).isFalse();
+            assertThatCharacter(null, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatCharacter(Character c) {
-            return assertThat(HalfwidthCharacter.isHalfwidthCharacter(c)).as(c + "");
+        private void assertThatCharacter(Character c, boolean expected) {
+            assertThat(c + "", HalfwidthCharacter.isHalfwidthCharacter(c), is(expected));
         }
     }
     
@@ -99,28 +99,28 @@ public class HalfwidthCharacterTest {
 
         @Test
         public void 半角ｶﾅ記号はtrue() {
-            assertThatHalfwidthCharacter(Characters.HALFWIDTH_SYMBOL).isTrue();
+            assertThatHalfwidthCharacter(Characters.HALFWIDTH_SYMBOL, true);
         }
 
         @Test
         public void 半角ｶﾅ文字はfalse() {
-            assertThatHalfwidthCharacter(Characters.HALFWIDTH_CHARACTER).isFalse();
+            assertThatHalfwidthCharacter(Characters.HALFWIDTH_CHARACTER, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatHalfwidthCharacter(List<Character> chars) {
+        private void assertThatHalfwidthCharacter(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            return assertThat(HalfwidthCharacter.isHalfwidthSymbol(str)).as(str);
+            assertThat(str, HalfwidthCharacter.isHalfwidthSymbol(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(HalfwidthCharacter.isHalfwidthSymbol(str)).isFalse();
+            assertThat(str, HalfwidthCharacter.isHalfwidthSymbol(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(HalfwidthCharacter.isHalfwidthSymbol((String)null)).isFalse();
+            assertThat(HalfwidthCharacter.isHalfwidthSymbol((String)null), is(false));
         }
     }
     
@@ -129,24 +129,24 @@ public class HalfwidthCharacterTest {
         @Test
         public void 半角ｶﾅ記号はtrue() {
             for (Character c : Characters.HALFWIDTH_SYMBOL) {
-                assertThatSymbol(c).isTrue();
+                assertThatSymbol(c, true);
             }
         }
 
         @Test
         public void 半角ｶﾅ文字はfalse() {
             for (Character c : Characters.HALFWIDTH_CHARACTER) {
-                assertThatSymbol(c).isFalse();
+                assertThatSymbol(c, false);
             }
         }
 
         @Test
         public void nullはfalse() {
-            assertThatSymbol(null).isFalse();
+            assertThatSymbol(null, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatSymbol(Character c) {
-            return assertThat(HalfwidthCharacter.isHalfwidthSymbol(c)).as(c + "");
+        private void assertThatSymbol(Character c, boolean expected) {
+            assertThat(c + "", HalfwidthCharacter.isHalfwidthSymbol(c), is(expected));
         }
     }
     
@@ -154,28 +154,28 @@ public class HalfwidthCharacterTest {
 
         @Test
         public void 半角ｶﾅ文字種はtrue() {
-            assertThatHalfwidthCharacter(Characters.HALFWIDTH).isTrue();
+            assertThatHalfwidthCharacter(Characters.HALFWIDTH, true);
         }
 
         @Test
         public void アスキー文字種はfalse() {
-            assertThatHalfwidthCharacter(Characters.ASCII).isFalse();
+            assertThatHalfwidthCharacter(Characters.ASCII, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatHalfwidthCharacter(List<Character> chars) {
+        private void assertThatHalfwidthCharacter(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            return assertThat(HalfwidthCharacter.isHalfwidth(str)).as(str);
+            assertThat(str, HalfwidthCharacter.isHalfwidth(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(HalfwidthCharacter.isHalfwidth(str)).isFalse();
+            assertThat(str, HalfwidthCharacter.isHalfwidth(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(HalfwidthCharacter.isHalfwidth((String)null)).isFalse();
+            assertThat(HalfwidthCharacter.isHalfwidth((String)null), is(false));
         }
     }
     
@@ -184,24 +184,24 @@ public class HalfwidthCharacterTest {
         @Test
         public void 半角ｶﾅ文字種はtrue() {
             for (Character c : Characters.HALFWIDTH_CHARACTER) {
-                assertThatHalfwidth(c).isTrue();
+                assertThatHalfwidth(c, true);
             }
         }
         
         @Test
         public void アスキー文字種はfalse() {
             for (Character c : Characters.ASCII) {
-                assertThatHalfwidth(c).isFalse();
+                assertThatHalfwidth(c, false);
             }
         }
 
         @Test
         public void nullはfalse() {
-            assertThatHalfwidth(null).isFalse();
+            assertThatHalfwidth(null, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatHalfwidth(Character c) {
-            return assertThat(HalfwidthCharacter.isHalfwidth(c)).as(c + "");
+        private void assertThatHalfwidth(Character c, boolean expected) {
+            assertThat(c + "", HalfwidthCharacter.isHalfwidth(c), is(expected));
         }
     }
 }

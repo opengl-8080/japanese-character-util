@@ -1,8 +1,8 @@
 package com.github.opengl8080.kanatil;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-import org.assertj.core.api.AbstractBooleanAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -15,21 +15,21 @@ public class UtilsTest {
         
         @Test
         public void 空文字はtrue() throws Exception {
-            assertThatIsEmpty("").isTrue();
+            assertThatIsEmpty("", true);
         }
         
         @Test
         public void 非空文字はfalse() throws Exception {
-            assertThatIsEmpty("abc").isFalse();
+            assertThatIsEmpty("abc", false);
         }
         
         @Test
         public void nullはtrue() throws Exception {
-            assertThatIsEmpty(null).isTrue();
+            assertThatIsEmpty(null, true);
         }
         
-        private AbstractBooleanAssert<?> assertThatIsEmpty(String string) {
-            return assertThat(Utils.isEmpty(string));
+        private void assertThatIsEmpty(String string, boolean expected) {
+            assertThat(Utils.isEmpty(string), is(expected));
         }
     }
 
@@ -37,21 +37,21 @@ public class UtilsTest {
         
         @Test
         public void サロゲートペア文字を含む場合はtrue() throws Exception {
-            assertThatHasSurrogatePair("abc\uD867\uDE3Ddef").isTrue();
+            assertThatHasSurrogatePair("abc\uD867\uDE3Ddef", true);
         }
         
         @Test
         public void サロゲートペア文字を含まない場合はfalse() throws Exception {
-            assertThatHasSurrogatePair("abcdefあいうえお").isFalse();
+            assertThatHasSurrogatePair("abcdefあいうえお", false);
         }
         
         @Test
         public void nullはfalse() throws Exception {
-            assertThatHasSurrogatePair(null).isFalse();
+            assertThatHasSurrogatePair(null, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatHasSurrogatePair(String string) {
-            return assertThat(Utils.hasSurrogatePair(string));
+        private void assertThatHasSurrogatePair(String string, boolean expected) {
+            assertThat(Utils.hasSurrogatePair(string), is(expected));
         }
     }
 }

@@ -1,10 +1,10 @@
 package com.github.opengl8080.kanatil;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.assertj.core.api.AbstractBooleanAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,31 +14,31 @@ import de.bechte.junit.runners.context.HierarchicalContextRunner;
 public class AsciiCharacterTest {
     
     public class アスキー文字列判定 {
-
+        
         @Test
         public void アスキー文字はtrue() {
-            assertThatAscii(Characters.ASCII).isTrue();
+            assertThatAscii(Characters.ASCII, true);
         }
 
         @Test
         public void 半角ｶﾅはfalse() {
-            assertThatAscii(Characters.HALFWIDTH).isFalse();
+            assertThatAscii(Characters.HALFWIDTH, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatAscii(List<Character> chars) {
+        private void assertThatAscii(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            return assertThat(AsciiCharacter.isAscii(str)).as(str);
+            assertThat(str, AsciiCharacter.isAscii(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(AsciiCharacter.isAscii(str)).isFalse();
+            assertThat(AsciiCharacter.isAscii(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(AsciiCharacter.isAscii((String)null)).isFalse();
+            assertThat(AsciiCharacter.isAscii((String)null), is(false));
         }
     }
     
@@ -47,24 +47,24 @@ public class AsciiCharacterTest {
         @Test
         public void アスキー文字はtrue() {
             for (Character c : Characters.ASCII) {
-                assertThatAscii(c).isTrue();
+                assertThatAscii(c, true);
             }
         }
 
         @Test
         public void 半角ｶﾅはfalse() {
             for (Character c : Characters.HALFWIDTH) {
-                assertThatAscii(c).isFalse();
+                assertThatAscii(c, false);
             }
         }
 
         @Test
         public void nullはfalse() {
-            assertThatAscii(null).isFalse();
+            assertThatAscii(null, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatAscii(Character c) {
-            return assertThat(AsciiCharacter.isAscii(c)).as(c + "");
+        private void assertThatAscii(Character c, boolean expected) {
+            assertThat(c + "", AsciiCharacter.isAscii(c), is(expected));
         }
     }
     
@@ -72,28 +72,28 @@ public class AsciiCharacterTest {
 
         @Test
         public void 数値はtrue() {
-            assertThatNumber(Characters.HALF_NUMBER).isTrue();
+            assertThatNumber(Characters.HALF_NUMBER, true);
         }
 
         @Test
         public void アルファベットはfalse() {
-            assertThatNumber(Characters.ALPHABET).isFalse();
+            assertThatNumber(Characters.ALPHABET, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatNumber(List<Character> chars) {
+        private void assertThatNumber(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            return assertThat(AsciiCharacter.isNumber(str)).as(str);
+            assertThat(str, AsciiCharacter.isNumber(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "123\uD867\uDE3D456";
-            assertThat(AsciiCharacter.isNumber(str)).isFalse();
+            assertThat(str, AsciiCharacter.isNumber(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(AsciiCharacter.isNumber((String)null)).isFalse();
+            assertThat(AsciiCharacter.isNumber((String)null), is(false));
         }
     }
 
@@ -102,24 +102,24 @@ public class AsciiCharacterTest {
         @Test
         public void 数字はtrue() {
             for (Character c : Characters.HALF_NUMBER) {
-                assertThatNumber(c).isTrue();
+                assertThatNumber(c, true);
             }
         }
 
         @Test
         public void アルファベットはfalse() {
             for (Character c : Characters.ALPHABET) {
-                assertThatNumber(c).isFalse();
+                assertThatNumber(c, false);
             }
         }
 
         @Test
         public void nullはfalse() {
-            assertThatNumber(null).isFalse();
+            assertThatNumber(null, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatNumber(Character c) {
-            return assertThat(AsciiCharacter.isNumber(c)).as(c + "");
+        private void assertThatNumber(Character c, boolean expected) {
+            assertThat(AsciiCharacter.isNumber(c), is(expected));
         }
     }
     
@@ -127,28 +127,28 @@ public class AsciiCharacterTest {
 
         @Test
         public void アルファベットはtrue() {
-            assertThatAlphabet(Characters.ALPHABET).isTrue();
+            assertThatAlphabet(Characters.ALPHABET, true);
         }
 
         @Test
         public void 記号はfalse() {
-            assertThatAlphabet(Characters.HALF_SYMBOL).isFalse();
+            assertThatAlphabet(Characters.HALF_SYMBOL, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatAlphabet(List<Character> chars) {
+        private void assertThatAlphabet(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            return assertThat(AsciiCharacter.isAlphabet(str)).as(str);
+            assertThat(AsciiCharacter.isAlphabet(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(AsciiCharacter.isAlphabet(str)).isFalse();
+            assertThat(AsciiCharacter.isAlphabet(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(AsciiCharacter.isAlphabet((String)null)).isFalse();
+            assertThat(AsciiCharacter.isAlphabet((String)null), is(false));
         }
     }
 
@@ -157,24 +157,24 @@ public class AsciiCharacterTest {
         @Test
         public void アルファベットはtrue() {
             for (Character c : Characters.ALPHABET) {
-                assertThatAlphabet(c).isTrue();
+                assertThatAlphabet(c, true);
             }
         }
 
         @Test
         public void 記号はfalse() {
             for (Character c : Characters.HALF_SYMBOL) {
-                assertThatAlphabet(c).isFalse();
+                assertThatAlphabet(c, false);
             }
         }
 
         @Test
         public void nullはfalse() {
-            assertThatAlphabet(null).isFalse();
+            assertThatAlphabet(null, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatAlphabet(Character c) {
-            return assertThat(AsciiCharacter.isAlphabet(c)).as(c + "");
+        private void assertThatAlphabet(Character c, boolean expected) {
+            assertThat(c + "", AsciiCharacter.isAlphabet(c), is(expected));
         }
     }
     
@@ -182,28 +182,28 @@ public class AsciiCharacterTest {
 
         @Test
         public void 記号はtrue() {
-            assertThatSymbol(Characters.HALF_SYMBOL).isTrue();
+            assertThatSymbol(Characters.HALF_SYMBOL, true);
         }
 
         @Test
         public void アルファベットはfalse() {
-            assertThatSymbol(Characters.ALPHABET).isFalse();
+            assertThatSymbol(Characters.ALPHABET, false);
         }
         
-        private AbstractBooleanAssert<?> assertThatSymbol(List<Character> chars) {
+        private void assertThatSymbol(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            return assertThat(AsciiCharacter.isSymbol(str)).as(str);
+            assertThat(AsciiCharacter.isSymbol(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(AsciiCharacter.isSymbol(str)).isFalse();
+            assertThat(AsciiCharacter.isSymbol(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(AsciiCharacter.isSymbol((String)null)).isFalse();
+            assertThat(AsciiCharacter.isSymbol((String)null), is(false));
         }
     }
 
@@ -212,25 +212,25 @@ public class AsciiCharacterTest {
         @Test
         public void 記号はtrue() {
             for (Character c : Characters.HALF_SYMBOL) {
-                assertThatSymbol(c).isTrue();
+                assertThatSymbol(c, true);
             }
         }
 
         @Test
         public void アルファベットはfalse() {
             for (Character c : Characters.ALPHABET) {
-                assertThatSymbol(c).isFalse();
+                assertThatSymbol(c, false);
             }
         }
 
         @Test
         public void nullはfalse() {
-            assertThatSymbol(null).isFalse();
+            assertThatSymbol(null, false);
         }
         
         
-        private AbstractBooleanAssert<?> assertThatSymbol(Character c) {
-            return assertThat(AsciiCharacter.isSymbol(c)).as(c + "");
+        private void assertThatSymbol(Character c, boolean expected) {
+            assertThat(c + "", AsciiCharacter.isSymbol(c), is(expected));
         }
     }
 }
