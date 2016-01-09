@@ -44,7 +44,7 @@ public class HalfwidthCharacter {
     }
 
     public static boolean isHalfwidthCharacter(String string) {
-        if (isEmpty(string) || hasSurrogatePair(string)) {
+        if (Utils.isEmpty(string) || Utils.hasSurrogatePair(string)) {
             return false;
         }
         
@@ -57,19 +57,8 @@ public class HalfwidthCharacter {
         return true;
     }
     
-    private static boolean isEmpty(String string) {
-        return string == null || string.isEmpty();
-    }
-    
-    private static boolean hasSurrogatePair(String string) {
-        int length = string.length();
-        int codePointLength = string.codePointCount(0, length);
-        
-        return length != codePointLength;
-    }
-
     public static boolean isHalfwidthSymbol(String string) {
-        if (isEmpty(string) || hasSurrogatePair(string)) {
+        if (Utils.isEmpty(string) || Utils.hasSurrogatePair(string)) {
             return false;
         }
         
@@ -83,7 +72,7 @@ public class HalfwidthCharacter {
     }
 
     public static boolean isHalfwidth(String string) {
-        if (isEmpty(string) || hasSurrogatePair(string)) {
+        if (Utils.isEmpty(string) || Utils.hasSurrogatePair(string)) {
             return false;
         }
         

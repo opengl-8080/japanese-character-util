@@ -45,7 +45,7 @@ public class AsciiCharacter {
     }
 
     public static boolean isAscii(String string) {
-        if (isEmpty(string) || hasSurrogatePair(string)) {
+        if (Utils.isEmpty(string) || Utils.hasSurrogatePair(string)) {
             return false;
         }
         
@@ -59,7 +59,7 @@ public class AsciiCharacter {
     }
 
     public static boolean isNumber(String string) {
-        if (isEmpty(string) || hasSurrogatePair(string)) {
+        if (Utils.isEmpty(string) || Utils.hasSurrogatePair(string)) {
             return false;
         }
         
@@ -73,7 +73,7 @@ public class AsciiCharacter {
     }
 
     public static boolean isAlphabet(String string) {
-        if (isEmpty(string) || hasSurrogatePair(string)) {
+        if (Utils.isEmpty(string) || Utils.hasSurrogatePair(string)) {
             return false;
         }
         
@@ -87,7 +87,7 @@ public class AsciiCharacter {
     }
 
     public static boolean isSymbol(String string) {
-        if (isEmpty(string) || hasSurrogatePair(string)) {
+        if (Utils.isEmpty(string) || Utils.hasSurrogatePair(string)) {
             return false;
         }
         
@@ -98,17 +98,6 @@ public class AsciiCharacter {
         }
         
         return true;
-    }
-    
-    private static boolean isEmpty(String string) {
-        return string == null || string.isEmpty();
-    }
-    
-    private static boolean hasSurrogatePair(String string) {
-        int length = string.length();
-        int codePointLength = string.codePointCount(0, length);
-        
-        return length != codePointLength;
     }
 
 }

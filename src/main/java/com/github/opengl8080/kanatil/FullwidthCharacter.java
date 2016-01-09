@@ -21,7 +21,7 @@ public class FullwidthCharacter {
     }
 
     public static boolean isHiragana(String string) {
-        if (isEmpty(string) || hasSurrogatePair(string)) {
+        if (Utils.isEmpty(string) || Utils.hasSurrogatePair(string)) {
             return false;
         }
         
@@ -33,20 +33,9 @@ public class FullwidthCharacter {
         
         return true;
     }
-    
-    private static boolean isEmpty(String string) {
-        return string == null || string.isEmpty();
-    }
-    
-    private static boolean hasSurrogatePair(String string) {
-        int length = string.length();
-        int codePointLength = string.codePointCount(0, length);
-        
-        return length != codePointLength;
-    }
 
     public static boolean isKatakana(String string) {
-        if (isEmpty(string) || hasSurrogatePair(string)) {
+        if (Utils.isEmpty(string) || Utils.hasSurrogatePair(string)) {
             return false;
         }
         
