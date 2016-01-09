@@ -2,19 +2,39 @@ package com.github.opengl8080.kanatil;
 
 public class AsciiCharacter {
 
+    public static boolean isAscii(Character c) {
+        if (c == null) return false;
+        return isAscii(c.charValue());
+    }
+
     public static boolean isAscii(char c) {
         return isNumber(c)
                 || isAlphabet(c)
                 || isSymbol(c);
     }
 
+    public static boolean isNumber(Character c) {
+        if (c == null) return false;
+        return isNumber(c.charValue());
+    }
+
     public static boolean isNumber(char c) {
         return 0x0030 <= c && c <= 0x0039;
+    }
+
+    public static boolean isAlphabet(Character c) {
+        if (c == null) return false;
+        return isAlphabet(c.charValue());
     }
 
     public static boolean isAlphabet(char c) {
         return (0x0041 <= c && c <= 0x005A)
                 || (0x0061 <= c && c <= 0x007A);
+    }
+
+    public static boolean isSymbol(Character c) {
+        if (c == null) return false;
+        return isSymbol(c.charValue());
     }
 
     public static boolean isSymbol(char c) {
