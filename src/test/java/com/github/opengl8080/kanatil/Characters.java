@@ -27,6 +27,8 @@ public class Characters {
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
         'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
     );
+    /**半角アルファベット*/
+    public static final List<Character> ALPHABET;
     /**アスキー文字*/
     public static final List<Character> ASCII;
     
@@ -39,6 +41,12 @@ public class Characters {
         list.addAll(LOWER_ALPHABET);
         
         ASCII = Collections.unmodifiableList(list);
+        
+        list = new ArrayList<Character>();
+        list.addAll(UPPER_ALPHABET);
+        list.addAll(LOWER_ALPHABET);
+        
+        ALPHABET = Collections.unmodifiableList(list);
     }
     
     /**半角ｶﾅ記号*/
