@@ -37,6 +37,24 @@ public class KanatilTest {
     }
 
     @Test
+    public void 半角ｶﾅ記号以外判定_true() {
+        for (char kanaCharacter : kanaCharacters) {
+            assertThat(Kanatil.isHalfwidthKanaCharacter(kanaCharacter))
+                .as(kanaCharacter + "")
+                .isTrue();
+        }
+    }
+
+    @Test
+    public void 半角ｶﾅ記号以外判定_記号はfalse() {
+        for (char kanaSymbol : kanaSymbols) {
+            assertThat(Kanatil.isHalfwidthKanaCharacter(kanaSymbol))
+                .as(kanaSymbol + "")
+                .isFalse();
+        }
+    }
+
+    @Test
     public void 半角ｶﾅ記号判定_true() {
         for (char kanaSymbol : kanaSymbols) {
             assertThat(Kanatil.isHalfwidthKanaSymbol(kanaSymbol))
@@ -47,9 +65,9 @@ public class KanatilTest {
 
     @Test
     public void 半角ｶﾅ記号判定_記号以外はfalse() {
-        for (char kanaSymbol : kanaCharacters) {
-            assertThat(Kanatil.isHalfwidthKanaSymbol(kanaSymbol))
-                .as(kanaSymbol + "")
+        for (char kanaCharacter : kanaCharacters) {
+            assertThat(Kanatil.isHalfwidthKanaSymbol(kanaCharacter))
+                .as(kanaCharacter + "")
                 .isFalse();
         }
     }
