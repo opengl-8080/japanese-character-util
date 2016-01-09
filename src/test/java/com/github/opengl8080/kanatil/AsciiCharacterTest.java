@@ -62,6 +62,35 @@ public class AsciiCharacterTest {
             return assertThat(AsciiCharacter.isAscii(c)).as(c + "");
         }
     }
+    
+    public class 数値文字列判定 {
+
+        @Test
+        public void 数値はtrue() {
+            assertThatNumber(Characters.HALF_NUMBER).isTrue();
+        }
+
+        @Test
+        public void アルファベットはfalse() {
+            assertThatNumber(Characters.ALPHABET).isFalse();
+        }
+        
+        private AbstractBooleanAssert<?> assertThatNumber(List<Character> chars) {
+            String str = Characters.toString(chars);
+            return assertThat(AsciiCharacter.isNumber(str)).as(str);
+        }
+
+        @Test
+        public void サロゲートペア文字が含まれる場合はfalse() {
+            String str = "123\uD867\uDE3D456"; // 123𩸽456
+            assertThat(AsciiCharacter.isNumber(str)).isFalse();
+        }
+
+        @Test
+        public void nullを渡した場合はfalseを返す() {
+            assertThat(AsciiCharacter.isNumber(null)).isFalse();
+        }
+    }
 
     public class 数字判定 {
 

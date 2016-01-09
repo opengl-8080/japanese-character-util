@@ -1,5 +1,7 @@
 package com.github.opengl8080.kanatil;
 
+import java.math.BigDecimal;
+
 public class AsciiCharacter {
 
     public static boolean isAscii(char c) {
@@ -43,6 +45,20 @@ public class AsciiCharacter {
         int codePointLength = string.codePointCount(0, length);
         
         return length != codePointLength;
+    }
+
+    public static boolean isNumber(String string) {
+        if (string == null || hasSurrogatePair(string)) {
+            return false;
+        }
+        
+        for (char c : string.toCharArray()) {
+            if (!isNumber(c)) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
 }
