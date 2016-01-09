@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
 @RunWith(HierarchicalContextRunner.class)
-public class HalfwidthKanaTest {
+public class HalfwidthCharacterTest {
 
     /**半角ｶﾅ記号*/
     private static List<Character> kanaSymbols = Arrays.asList('ﾞ', 'ﾟ', '｡', '｢', '｣', '､', '･', 'ｰ');
@@ -64,7 +64,7 @@ public class HalfwidthKanaTest {
         @Test
         public void 半角ｶﾅ小文字はtrue() {
             for (char c : kanaLowerCharacters) {
-                assertThat(HalfwidthKana.isHalfwidthKanaLowerCharacter(c))
+                assertThat(HalfwidthCharacter.isHalfwidthKanaLowerCharacter(c))
                     .as(c + "")
                     .isTrue();
             }
@@ -73,7 +73,7 @@ public class HalfwidthKanaTest {
         @Test
         public void 半角ｶﾅ通常文字はfalse() {
             for (char c : kanaUpperCharacters) {
-                assertThat(HalfwidthKana.isHalfwidthKanaLowerCharacter(c))
+                assertThat(HalfwidthCharacter.isHalfwidthKanaLowerCharacter(c))
                     .as(c + "")
                     .isFalse();
             }
@@ -85,7 +85,7 @@ public class HalfwidthKanaTest {
         @Test
         public void 半角ｶﾅ文字はtrue() {
             for (char c : kanaCharacters) {
-                assertThat(HalfwidthKana.isHalfwidthKanaCharacter(c))
+                assertThat(HalfwidthCharacter.isHalfwidthKanaCharacter(c))
                     .as(c + "")
                     .isTrue();
             }
@@ -94,7 +94,7 @@ public class HalfwidthKanaTest {
         @Test
         public void 半角ｶﾅ記号はfalse() {
             for (char c : kanaSymbols) {
-                assertThat(HalfwidthKana.isHalfwidthKanaCharacter(c))
+                assertThat(HalfwidthCharacter.isHalfwidthKanaCharacter(c))
                     .as(c + "")
                     .isFalse();
             }
@@ -106,7 +106,7 @@ public class HalfwidthKanaTest {
         @Test
         public void 半角ｶﾅ記号はtrue() {
             for (char c : kanaSymbols) {
-                assertThat(HalfwidthKana.isHalfwidthKanaSymbol(c))
+                assertThat(HalfwidthCharacter.isHalfwidthKanaSymbol(c))
                     .as(c + "")
                     .isTrue();
             }
@@ -115,7 +115,7 @@ public class HalfwidthKanaTest {
         @Test
         public void 半角ｶﾅ文字はfalse() {
             for (char c : kanaCharacters) {
-                assertThat(HalfwidthKana.isHalfwidthKanaSymbol(c))
+                assertThat(HalfwidthCharacter.isHalfwidthKanaSymbol(c))
                     .as(c + "")
                     .isFalse();
             }
@@ -127,7 +127,7 @@ public class HalfwidthKanaTest {
         @Test
         public void 半角ｶﾅ文字種はtrue() {
             for (char c : kanas) {
-                assertThat(HalfwidthKana.isHalfwidthKana(c))
+                assertThat(HalfwidthCharacter.isHalfwidthKana(c))
                     .as(c + "")
                     .isTrue();
             }
@@ -136,7 +136,7 @@ public class HalfwidthKanaTest {
         @Test
         public void アスキー文字種はfalse() {
             for (char c : asciies) {
-                assertThat(HalfwidthKana.isHalfwidthKana(c))
+                assertThat(HalfwidthCharacter.isHalfwidthKana(c))
                     .as(c + "")
                     .isFalse();
             }
