@@ -32,7 +32,7 @@ public class AsciiCharacterTest {
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
-            String str = "abc\uD867\uDE3Ddef"; // abc𩸽def
+            String str = "abc\uD867\uDE3Ddef";
             assertThat(AsciiCharacter.isAscii(str)).isFalse();
         }
 
@@ -82,7 +82,7 @@ public class AsciiCharacterTest {
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
-            String str = "123\uD867\uDE3D456"; // 123𩸽456
+            String str = "123\uD867\uDE3D456";
             assertThat(AsciiCharacter.isNumber(str)).isFalse();
         }
 
@@ -112,6 +112,35 @@ public class AsciiCharacterTest {
             return assertThat(AsciiCharacter.isNumber(c)).as(c + "");
         }
     }
+    
+    public class アルファベット文字列判定 {
+
+        @Test
+        public void アルファベットはtrue() {
+            assertThatAlphabet(Characters.ALPHABET).isTrue();
+        }
+
+        @Test
+        public void 記号はfalse() {
+            assertThatAlphabet(Characters.HALF_SYMBOL).isFalse();
+        }
+        
+        private AbstractBooleanAssert<?> assertThatAlphabet(List<Character> chars) {
+            String str = Characters.toString(chars);
+            return assertThat(AsciiCharacter.isAlphabet(str)).as(str);
+        }
+
+        @Test
+        public void サロゲートペア文字が含まれる場合はfalse() {
+            String str = "abc\uD867\uDE3Ddef";
+            assertThat(AsciiCharacter.isAlphabet(str)).isFalse();
+        }
+
+        @Test
+        public void nullを渡した場合はfalseを返す() {
+            assertThat(AsciiCharacter.isAlphabet(null)).isFalse();
+        }
+    }
 
     public class アルファベット判定 {
 
@@ -131,6 +160,35 @@ public class AsciiCharacterTest {
         
         private AbstractBooleanAssert<?> assertThatAlphabet(char c) {
             return assertThat(AsciiCharacter.isAlphabet(c)).as(c + "");
+        }
+    }
+    
+    public class 記号文字列判定 {
+
+        @Test
+        public void 記号はtrue() {
+            assertThatSymbol(Characters.HALF_SYMBOL).isTrue();
+        }
+
+        @Test
+        public void アルファベットはfalse() {
+            assertThatSymbol(Characters.ALPHABET).isFalse();
+        }
+        
+        private AbstractBooleanAssert<?> assertThatSymbol(List<Character> chars) {
+            String str = Characters.toString(chars);
+            return assertThat(AsciiCharacter.isSymbol(str)).as(str);
+        }
+
+        @Test
+        public void サロゲートペア文字が含まれる場合はfalse() {
+            String str = "abc\uD867\uDE3Ddef";
+            assertThat(AsciiCharacter.isSymbol(str)).isFalse();
+        }
+
+        @Test
+        public void nullを渡した場合はfalseを返す() {
+            assertThat(AsciiCharacter.isSymbol(null)).isFalse();
         }
     }
 

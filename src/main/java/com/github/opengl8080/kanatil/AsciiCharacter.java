@@ -1,7 +1,5 @@
 package com.github.opengl8080.kanatil;
 
-import java.math.BigDecimal;
-
 public class AsciiCharacter {
 
     public static boolean isAscii(char c) {
@@ -27,7 +25,7 @@ public class AsciiCharacter {
     }
 
     public static boolean isAscii(String string) {
-        if (string == null || hasSurrogatePair(string)) {
+        if (isEmpty(string) || hasSurrogatePair(string)) {
             return false;
         }
         
@@ -39,16 +37,9 @@ public class AsciiCharacter {
         
         return true;
     }
-    
-    private static boolean hasSurrogatePair(String string) {
-        int length = string.length();
-        int codePointLength = string.codePointCount(0, length);
-        
-        return length != codePointLength;
-    }
 
     public static boolean isNumber(String string) {
-        if (string == null || hasSurrogatePair(string)) {
+        if (isEmpty(string) || hasSurrogatePair(string)) {
             return false;
         }
         
@@ -59,6 +50,45 @@ public class AsciiCharacter {
         }
         
         return true;
+    }
+
+    public static boolean isAlphabet(String string) {
+        if (isEmpty(string) || hasSurrogatePair(string)) {
+            return false;
+        }
+        
+        for (char c : string.toCharArray()) {
+            if (!isAlphabet(c)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    public static boolean isSymbol(String string) {
+        if (isEmpty(string) || hasSurrogatePair(string)) {
+            return false;
+        }
+        
+        for (char c : string.toCharArray()) {
+            if (!isSymbol(c)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    private static boolean isEmpty(String string) {
+        return string == null || string.isEmpty();
+    }
+    
+    private static boolean hasSurrogatePair(String string) {
+        int length = string.length();
+        int codePointLength = string.codePointCount(0, length);
+        
+        return length != codePointLength;
     }
 
 }
