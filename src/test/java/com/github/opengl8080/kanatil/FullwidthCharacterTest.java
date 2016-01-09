@@ -2,6 +2,7 @@ package com.github.opengl8080.kanatil;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.assertj.core.api.AbstractBooleanAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,19 +15,24 @@ public class FullwidthCharacterTest {
         
         @Test
         public void ひらがなの場合はtrue() throws Exception {
-            for (char c : Characters.HIRAGANA) {
-                assertThat(FullwidthCharacter.isHiragana(c))
-                    .as(c + "")
-                    .isTrue();
+            for (Character c : Characters.HIRAGANA) {
+                assertThatHiragana(c).isTrue();
             }
         }
         @Test
         public void カタカナの場合はfalse() throws Exception {
-            for (char c : Characters.KATAKANA) {
-                assertThat(FullwidthCharacter.isHiragana(c))
-                    .as(c + "")
-                    .isFalse();
+            for (Character c : Characters.KATAKANA) {
+                assertThatHiragana(c).isFalse();
             }
+        }
+
+        @Test
+        public void nullはfalse() {
+            assertThatHiragana(null).isFalse();
+        }
+        
+        private AbstractBooleanAssert<?> assertThatHiragana(Character c) {
+            return assertThat(FullwidthCharacter.isHiragana(c)).as(c + "");
         }
     }
 
@@ -34,19 +40,25 @@ public class FullwidthCharacterTest {
 
         @Test
         public void カタカナの場合はtrue() throws Exception {
-            for (char c : Characters.KATAKANA) {
-                assertThat(FullwidthCharacter.isKatakana(c))
-                    .as(c + "")
-                    .isTrue();
+            for (Character c : Characters.KATAKANA) {
+                assertThatKatakana(c).isTrue();
             }
         }
+        
         @Test
         public void ひらがなの場合はfalse() throws Exception {
-            for (char c : Characters.HIRAGANA) {
-                assertThat(FullwidthCharacter.isKatakana(c))
-                    .as(c + "")
-                    .isFalse();
+            for (Character c : Characters.HIRAGANA) {
+                assertThatKatakana(c).isFalse();
             }
+        }
+
+        @Test
+        public void nullはfalse() {
+            assertThatKatakana(null).isFalse();
+        }
+        
+        private AbstractBooleanAssert<?> assertThatKatakana(Character c) {
+            return assertThat(FullwidthCharacter.isKatakana(c)).as(c + "");
         }
     }
     
