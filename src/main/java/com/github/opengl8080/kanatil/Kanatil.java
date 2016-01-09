@@ -16,4 +16,8 @@ public class Kanatil {
     public static boolean isHalfwidthKana(char c) {
         return isHalfwidthKanaSymbol(c) || isHalfwidthKanaCharacter(c);
     }
+
+    public static boolean isHalfwidthKanaLowerCharacter(char c) {
+        return 0xFF67 <= c && c <= 0xFF6F;
+    }
 }
