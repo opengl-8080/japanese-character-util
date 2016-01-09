@@ -9,12 +9,14 @@ public class HalfwidthCharacter {
     }
 
     public static boolean isHalfwidthCharacter(char c) {
-        return 0xFF66 <= c && c <= 0xFF6F
+        return 0xFF66 == c
+                || isHalfwidthLowerCharacter(c)
                 || 0xFF71 <= c && c <= 0xFF9D;
     }
     
     public static boolean isHalfwidth(char c) {
-        return isHalfwidthSymbol(c) || isHalfwidthCharacter(c);
+        return isHalfwidthSymbol(c)
+                || isHalfwidthCharacter(c);
     }
 
     public static boolean isHalfwidthLowerCharacter(char c) {
