@@ -2,6 +2,9 @@ package com.github.opengl8080.kanatil;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
+import org.assertj.core.api.AbstractBooleanAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -10,24 +13,53 @@ import de.bechte.junit.runners.context.HierarchicalContextRunner;
 @RunWith(HierarchicalContextRunner.class)
 public class AsciiCharacterTest {
     
+    public class アスキー文字列判定 {
+
+        @Test
+        public void アスキー文字はtrue() {
+            assertThatAscii(Characters.ASCII).isTrue();
+        }
+
+        @Test
+        public void 半角ｶﾅはfalse() {
+            assertThatAscii(Characters.HALFWIDTH).isFalse();
+        }
+        
+        private AbstractBooleanAssert<?> assertThatAscii(List<Character> chars) {
+            String str = Characters.toString(chars);
+            return assertThat(AsciiCharacter.isAscii(str)).as(str);
+        }
+
+        @Test
+        public void サロゲートペア文字が含まれる場合はfalse() {
+            String str = "abc\uD867\uDE3Ddef"; // abc𩸽def
+            assertThat(AsciiCharacter.isAscii(str)).isFalse();
+        }
+
+        @Test
+        public void nullを渡した場合はfalseを返す() {
+            assertThat(AsciiCharacter.isAscii(null)).isFalse();
+        }
+    }
+    
     public class アスキー文字判定 {
 
         @Test
         public void アスキー文字はtrue() {
             for (char c : Characters.ASCII) {
-                assertThat(AsciiCharacter.isAscii(c))
-                    .as(c + "")
-                    .isTrue();
+                assertThatAscii(c).isTrue();
             }
         }
 
         @Test
         public void 半角ｶﾅはfalse() {
             for (char c : Characters.HALFWIDTH) {
-                assertThat(AsciiCharacter.isAscii(c))
-                    .as(c + "")
-                    .isFalse();
+                assertThatAscii(c).isFalse();
             }
+        }
+        
+        private AbstractBooleanAssert<?> assertThatAscii(char c) {
+            return assertThat(AsciiCharacter.isAscii(c)).as(c + "");
         }
     }
 
@@ -36,19 +68,19 @@ public class AsciiCharacterTest {
         @Test
         public void 数字はtrue() {
             for (char c : Characters.HALF_NUMBER) {
-                assertThat(AsciiCharacter.isNumber(c))
-                    .as(c + "")
-                    .isTrue();
+                assertThatNumber(c).isTrue();
             }
         }
 
         @Test
         public void アルファベットはfalse() {
             for (char c : Characters.ALPHABET) {
-                assertThat(AsciiCharacter.isNumber(c))
-                    .as(c + "")
-                    .isFalse();
+                assertThatNumber(c).isFalse();
             }
+        }
+        
+        private AbstractBooleanAssert<?> assertThatNumber(char c) {
+            return assertThat(AsciiCharacter.isNumber(c)).as(c + "");
         }
     }
 
@@ -57,19 +89,19 @@ public class AsciiCharacterTest {
         @Test
         public void アルファベットはtrue() {
             for (char c : Characters.ALPHABET) {
-                assertThat(AsciiCharacter.isAlphabet(c))
-                    .as(c + "")
-                    .isTrue();
+                assertThatAlphabet(c).isTrue();
             }
         }
 
         @Test
         public void 記号はfalse() {
             for (char c : Characters.HALF_SYMBOL) {
-                assertThat(AsciiCharacter.isAlphabet(c))
-                    .as(c + "")
-                    .isFalse();
+                assertThatAlphabet(c).isFalse();
             }
+        }
+        
+        private AbstractBooleanAssert<?> assertThatAlphabet(char c) {
+            return assertThat(AsciiCharacter.isAlphabet(c)).as(c + "");
         }
     }
 
@@ -78,19 +110,19 @@ public class AsciiCharacterTest {
         @Test
         public void 記号はtrue() {
             for (char c : Characters.HALF_SYMBOL) {
-                assertThat(AsciiCharacter.isSymbol(c))
-                    .as(c + "")
-                    .isTrue();
+                assertThatSymbol(c).isTrue();
             }
         }
 
         @Test
         public void アルファベットはfalse() {
             for (char c : Characters.ALPHABET) {
-                assertThat(AsciiCharacter.isSymbol(c))
-                    .as(c + "")
-                    .isFalse();
+                assertThatSymbol(c).isFalse();
             }
+        }
+        
+        private AbstractBooleanAssert<?> assertThatSymbol(char c) {
+            return assertThat(AsciiCharacter.isSymbol(c)).as(c + "");
         }
     }
 }

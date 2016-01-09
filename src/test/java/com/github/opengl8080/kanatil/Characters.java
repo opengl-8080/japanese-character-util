@@ -6,6 +6,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class Characters {
+    public static String toString(List<Character> chars) {
+        StringBuffer sb = new StringBuffer(chars.size());
+        
+        for (char c : chars) {
+            sb.append(c);
+        }
+        
+        return sb.toString();
+    }
+    
+    
     /**半角スペース*/
     public static final List<Character> HALF_SPACE = Arrays.asList(' ');
     /**半角数字*/

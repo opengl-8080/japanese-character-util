@@ -24,4 +24,25 @@ public class AsciiCharacter {
                 || (0x007B <= c && c <= 0x007E);
     }
 
+    public static boolean isAscii(String string) {
+        if (string == null || hasSurrogatePair(string)) {
+            return false;
+        }
+        
+        for (char c : string.toCharArray()) {
+            if (!isAscii(c)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    private static boolean hasSurrogatePair(String string) {
+        int length = string.length();
+        int codePointLength = string.codePointCount(0, length);
+        
+        return length != codePointLength;
+    }
+
 }
