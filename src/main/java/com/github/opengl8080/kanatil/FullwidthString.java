@@ -1,6 +1,6 @@
 package com.github.opengl8080.kanatil;
 
-public class FullwidthCharacter {
+public class FullwidthString {
 
     public static boolean isHiragana(Character c) {
         if (c == null) return false;

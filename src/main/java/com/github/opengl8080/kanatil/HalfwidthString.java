@@ -1,6 +1,6 @@
 package com.github.opengl8080.kanatil;
 
-public class HalfwidthCharacter {
+public class HalfwidthString {
 
     public static boolean isHalfwidthSymbol(Character c) {
         if (c == null) return false;

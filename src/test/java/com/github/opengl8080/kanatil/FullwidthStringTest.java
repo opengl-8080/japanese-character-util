@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
 @RunWith(HierarchicalContextRunner.class)
-public class FullwidthCharacterTest {
+public class FullwidthStringTest {
 
     public class ひらがな文字列判定 {
 
@@ -27,18 +27,18 @@ public class FullwidthCharacterTest {
         
         private void assertThatHiragana(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            assertThat(str, FullwidthCharacter.isHiragana(str), is(expected));
+            assertThat(str, FullwidthString.isHiragana(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(FullwidthCharacter.isHiragana(str), is(false));
+            assertThat(FullwidthString.isHiragana(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(FullwidthCharacter.isHiragana((String)null), is(false));
+            assertThat(FullwidthString.isHiragana((String)null), is(false));
         }
     }
     
@@ -63,7 +63,7 @@ public class FullwidthCharacterTest {
         }
         
         private void assertThatHiragana(Character c, boolean expected) {
-            assertThat(c + "", FullwidthCharacter.isHiragana(c), is(expected));
+            assertThat(c + "", FullwidthString.isHiragana(c), is(expected));
         }
     }
     
@@ -81,18 +81,18 @@ public class FullwidthCharacterTest {
         
         private void assertThatHiragana(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            assertThat(str, FullwidthCharacter.isKatakana(str), is(expected));
+            assertThat(str, FullwidthString.isKatakana(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(FullwidthCharacter.isKatakana(str), is(false));
+            assertThat(FullwidthString.isKatakana(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(FullwidthCharacter.isKatakana((String)null), is(false));
+            assertThat(FullwidthString.isKatakana((String)null), is(false));
         }
     }
 
@@ -118,7 +118,7 @@ public class FullwidthCharacterTest {
         }
         
         private void assertThatKatakana(Character c, boolean expected) {
-            assertThat(c + "", FullwidthCharacter.isKatakana(c), is(expected));
+            assertThat(c + "", FullwidthString.isKatakana(c), is(expected));
         }
     }
     

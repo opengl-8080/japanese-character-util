@@ -3,6 +3,10 @@ package com.github.opengl8080.kanatil;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -11,7 +15,7 @@ import de.bechte.junit.runners.context.HierarchicalContextRunner;
 @RunWith(HierarchicalContextRunner.class)
 public class UtilsTest {
 
-    public class isEmpty {
+    public class 文字列の空判定 {
         
         @Test
         public void 空文字はtrue() throws Exception {
@@ -30,6 +34,72 @@ public class UtilsTest {
         
         private void assertThatIsEmpty(String string, boolean expected) {
             assertThat(Utils.isEmpty(string), is(expected));
+        }
+    }
+
+    public class 配列の空判定 {
+        
+        @Test
+        public void 空はtrue() throws Exception {
+            assertThatIsEmpty(new Object[0], true);
+        }
+        
+        @Test
+        public void nullはtrue() throws Exception {
+            assertThatIsEmpty(null, true);
+        }
+        
+        @Test
+        public void 非空はfalse() throws Exception {
+            assertThatIsEmpty(new Object[] {"a"}, false);
+        }
+        
+        private void assertThatIsEmpty(Object[] array, boolean expected) {
+            assertThat(Utils.isEmpty(array), is(expected));
+        }
+    }
+
+    public class Iterableの空判定 {
+        
+        @Test
+        public void 空はtrue() throws Exception {
+            assertThatIsEmpty(Collections.emptyList(), true);
+        }
+        
+        @Test
+        public void nullはtrue() throws Exception {
+            assertThatIsEmpty(null, true);
+        }
+        
+        @Test
+        public void 非空はfalse() throws Exception {
+            assertThatIsEmpty(Arrays.asList(10), false);
+        }
+        
+        private void assertThatIsEmpty(Iterable<?> iterable, boolean expected) {
+            assertThat(Utils.isEmpty(iterable), is(expected));
+        }
+    }
+
+    public class Collectionの空判定 {
+        
+        @Test
+        public void 空はtrue() throws Exception {
+            assertThatIsEmpty(Collections.emptyList(), true);
+        }
+        
+        @Test
+        public void nullはtrue() throws Exception {
+            assertThatIsEmpty(null, true);
+        }
+        
+        @Test
+        public void 非空はfalse() throws Exception {
+            assertThatIsEmpty(Arrays.asList(10), false);
+        }
+        
+        private void assertThatIsEmpty(Collection<?> collection, boolean expected) {
+            assertThat(Utils.isEmpty(collection), is(expected));
         }
     }
 

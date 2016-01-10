@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
 @RunWith(HierarchicalContextRunner.class)
-public class HalfwidthCharacterTest {
+public class HalfwidthStringTest {
     
     
     public class 半角ｶﾅ小文字判定 {
@@ -36,7 +36,7 @@ public class HalfwidthCharacterTest {
         }
         
         private void assertThatLowerCharacter(Character c, boolean expected) {
-            assertThat(c + "", HalfwidthCharacter.isHalfwidthLowerCharacter(c), is(expected));
+            assertThat(c + "", HalfwidthString.isHalfwidthLowerCharacter(c), is(expected));
         }
     }
     
@@ -54,18 +54,18 @@ public class HalfwidthCharacterTest {
         
         private void assertThatHalfwidthCharacter(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            assertThat(str, HalfwidthCharacter.isHalfwidthCharacter(str), is(expected));
+            assertThat(str, HalfwidthString.isHalfwidthCharacter(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(HalfwidthCharacter.isHalfwidthCharacter(str), is(false));
+            assertThat(HalfwidthString.isHalfwidthCharacter(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(HalfwidthCharacter.isHalfwidthCharacter((String)null), is(false));
+            assertThat(HalfwidthString.isHalfwidthCharacter((String)null), is(false));
         }
     }
     
@@ -91,7 +91,7 @@ public class HalfwidthCharacterTest {
         }
         
         private void assertThatCharacter(Character c, boolean expected) {
-            assertThat(c + "", HalfwidthCharacter.isHalfwidthCharacter(c), is(expected));
+            assertThat(c + "", HalfwidthString.isHalfwidthCharacter(c), is(expected));
         }
     }
     
@@ -109,18 +109,18 @@ public class HalfwidthCharacterTest {
         
         private void assertThatHalfwidthCharacter(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            assertThat(str, HalfwidthCharacter.isHalfwidthSymbol(str), is(expected));
+            assertThat(str, HalfwidthString.isHalfwidthSymbol(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(str, HalfwidthCharacter.isHalfwidthSymbol(str), is(false));
+            assertThat(str, HalfwidthString.isHalfwidthSymbol(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(HalfwidthCharacter.isHalfwidthSymbol((String)null), is(false));
+            assertThat(HalfwidthString.isHalfwidthSymbol((String)null), is(false));
         }
     }
     
@@ -146,7 +146,7 @@ public class HalfwidthCharacterTest {
         }
         
         private void assertThatSymbol(Character c, boolean expected) {
-            assertThat(c + "", HalfwidthCharacter.isHalfwidthSymbol(c), is(expected));
+            assertThat(c + "", HalfwidthString.isHalfwidthSymbol(c), is(expected));
         }
     }
     
@@ -164,18 +164,18 @@ public class HalfwidthCharacterTest {
         
         private void assertThatHalfwidthCharacter(List<Character> chars, boolean expected) {
             String str = Characters.toString(chars);
-            assertThat(str, HalfwidthCharacter.isHalfwidth(str), is(expected));
+            assertThat(str, HalfwidthString.isHalfwidth(str), is(expected));
         }
 
         @Test
         public void サロゲートペア文字が含まれる場合はfalse() {
             String str = "abc\uD867\uDE3Ddef";
-            assertThat(str, HalfwidthCharacter.isHalfwidth(str), is(false));
+            assertThat(str, HalfwidthString.isHalfwidth(str), is(false));
         }
 
         @Test
         public void nullを渡した場合はfalseを返す() {
-            assertThat(HalfwidthCharacter.isHalfwidth((String)null), is(false));
+            assertThat(HalfwidthString.isHalfwidth((String)null), is(false));
         }
     }
     
@@ -201,7 +201,7 @@ public class HalfwidthCharacterTest {
         }
         
         private void assertThatHalfwidth(Character c, boolean expected) {
-            assertThat(c + "", HalfwidthCharacter.isHalfwidth(c), is(expected));
+            assertThat(c + "", HalfwidthString.isHalfwidth(c), is(expected));
         }
     }
 }
