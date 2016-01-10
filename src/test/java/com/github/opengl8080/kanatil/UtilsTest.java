@@ -107,12 +107,17 @@ public class UtilsTest {
         
         @Test
         public void サロゲートペア文字を含む場合はtrue() throws Exception {
-            assertThatHasSurrogatePair("abc\uD867\uDE3Ddef", true);
+            assertThatHasSurrogatePair("abc𩸽def", true);
         }
         
         @Test
         public void サロゲートペア文字を含まない場合はfalse() throws Exception {
             assertThatHasSurrogatePair("abcdefあいうえお", false);
+        }
+        
+        @Test
+        public void 空文字はfalse() throws Exception {
+            assertThatHasSurrogatePair("", false);
         }
         
         @Test

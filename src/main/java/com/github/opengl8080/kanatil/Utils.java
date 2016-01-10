@@ -23,7 +23,7 @@ public class Utils {
     }
 
     public static boolean hasSurrogatePair(String string) {
-        if (string == null) return false;
+        if (string == null || string.isEmpty()) return false;
         
         int length = string.length();
         int codePointLength = string.codePointCount(0, length);
