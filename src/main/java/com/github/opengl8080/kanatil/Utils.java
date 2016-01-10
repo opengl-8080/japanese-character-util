@@ -1,10 +1,18 @@
 package com.github.opengl8080.kanatil;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Utils {
     
     private Utils() {}
+    
+    public static int hashCode(Object... values) {
+        return Arrays.hashCode(values);
+    }
 
     public static boolean isEmpty(String string) {
         return string == null || string.isEmpty();
@@ -29,5 +37,18 @@ public class Utils {
         int codePointLength = string.codePointCount(0, length);
         
         return length != codePointLength;
+    }
+
+    public static <K, V> Map<V, K> reverse(Map<K, V> map) {
+        Map<V, K> reverse = new HashMap<V, K>();
+        if (map == null) {
+            return reverse;
+        }
+        
+        for (Entry<K, V> entry : map.entrySet()) {
+            reverse.put(entry.getValue(), entry.getKey());
+        }
+        
+        return reverse;
     }
 }

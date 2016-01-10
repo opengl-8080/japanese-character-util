@@ -65,13 +65,16 @@ public class Characters {
     /**半角ｶﾅ通常文字*/
     public static final List<Character> HALFWIDTH_UPPER_CHARACTER = Arrays.asList(
         'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ',
+        'ﾔ', 'ﾕ', 'ﾖ',
+        'ﾂ'
+    );
+    public static final List<Character> HALFWIDTH_NORMAL_CHARACTER = Arrays.asList(
         'ｶ', 'ｷ', 'ｸ', 'ｹ', 'ｺ',
         'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ',
-        'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ',
+        'ﾀ', 'ﾁ', 'ﾃ', 'ﾄ',
         'ﾅ', 'ﾆ', 'ﾇ', 'ﾈ', 'ﾉ',
         'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ',
         'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ',
-        'ﾔ', 'ﾕ', 'ﾖ',
         'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ',
         'ﾜ', 'ｦ', 'ﾝ'
     );
@@ -89,6 +92,7 @@ public class Characters {
     static {
         List<Character> list = new ArrayList<Character>();
         list.addAll(HALFWIDTH_UPPER_CHARACTER);
+        list.addAll(HALFWIDTH_NORMAL_CHARACTER);
         list.addAll(HALFWIDTH_LOWER_CHARACTER);
         
         HALFWIDTH_CHARACTER = Collections.unmodifiableList(list);

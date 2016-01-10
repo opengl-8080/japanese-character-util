@@ -6,6 +6,8 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,37 @@ import de.bechte.junit.runners.context.HierarchicalContextRunner;
 @RunWith(HierarchicalContextRunner.class)
 public class UtilsTest {
 
+    public class Mapのリバース {
+        
+        @Test
+        public void 空文字はtrue() throws Exception {
+            // setup
+            Map<String, Integer> map = new HashMap<String, Integer>();
+            map.put("foo", 10);
+            map.put("bar", 20);
+            
+            Map<Integer, String> expected = new HashMap<Integer, String>();
+            expected.put(10, "foo");
+            expected.put(20, "bar");
+            
+            // exercise
+            assertThatReverse(map, expected);
+        }
+        
+        @Test
+        public void nullを渡すと空のMapが返ってくる() throws Exception {
+            assertThatReverse(null, new HashMap<Integer, String>());
+        }
+        
+        public <K, V> void assertThatReverse(Map<K, V> map, Map<V, K> expected) throws Exception {
+            // exercise
+            Map<V, K> actual = Utils.reverse(map);
+            
+            // verify
+            assertThat(actual, is(expected));
+        }
+    }
+    
     public class 文字列の空判定 {
         
         @Test
