@@ -8,8 +8,8 @@ public class HalfwidthString {
     }
 
     public static boolean isHalfwidthSymbol(char c) {
-        return '\uFF61' <= c && c <= '\uFF65'
-                || '\uFF9E' <= c && c <= '\uFF9F'
+        return ('\uFF61' <= c && c <= '\uFF65')
+                || ('\uFF9E' <= c && c <= '\uFF9F')
                 || '\uFF70' == c;
     }
 
@@ -21,7 +21,7 @@ public class HalfwidthString {
     public static boolean isHalfwidthCharacter(char c) {
         return '\uFF66' == c
                 || isHalfwidthLowerCharacter(c)
-                || '\uFF71' <= c && c <= '\uFF9D';
+                || ('\uFF71' <= c && c <= '\uFF9D');
     }
     
     public static boolean isHalfwidth(Character c) {
